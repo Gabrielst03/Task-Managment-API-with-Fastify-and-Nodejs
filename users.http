@@ -1,0 +1,26 @@
+@baseUrl = http://localhost:3001
+
+
+# Create User Route
+POST {{baseUrl}}/user HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "João",
+  "email": "joao@gmail.com",
+  "password": "12345613"
+}
+
+###
+
+# List Users Route
+
+GET  {{baseUrl}}/users HTTP/1.1
+Content-Type: application/json
+
+###
+
+# Show User by ID Route
+GET {{baseUrl}}/users/a0568836-8a9e-4b2b-8ada-b4b35527019b HTTP/1.1
+Content-Type: application/json
+

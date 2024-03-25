@@ -65,7 +65,6 @@ export const userRoutes = async (app: FastifyInstance) => {
         email: true
       }
     })
-
     return user
 
   })

@@ -3,9 +3,7 @@ import z from "zod";
 import { prisma } from "../prisma";
 
 export const TasksRoutes = async(app: FastifyInstance) => {
-
-
-
+  
   app.post('/task', async (req, res) => {
 
     const taskSchema = z.object({
@@ -49,6 +47,63 @@ export const TasksRoutes = async(app: FastifyInstance) => {
     })
 
     return tasks
+  })
+
+  app.delete('/task/:id', async(req) => {
+    const taskSchema = z.object({
+      id: z.string().uuid()
+    })
+
+    const {id} = taskSchema.parse(req.params)
+
+    const Delete = await prisma.task.delete({
+      where: {
+        id
+      }
+    })
+
+    return Delete
+  })
+
+  app.put('/task/change-status/:id', async (req) => {
+    const taskSchema = z.object({
+      id: z.string().uuid(),
+    })
+
+    const {id} = taskSchema.parse(req.params)
+
+    const checkStatus = await prisma.task.findFirst({
+      where: {
+        id
+      }
+    })
+
+    if(checkStatus?.status === true) {
+      const update = await prisma.task.update({
+        where: {
+          id
+        },
+        data: {
+          status: false
+        }
+      })
+      return update
+    }
+
+    if(checkStatus?.status === false) {
+      const update = await prisma.task.update({
+        where: {
+          id
+        },
+        data: {
+          status: true
+        }
+      })
+      return update
+    }
+
+   
+
   })
 
 }

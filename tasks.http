@@ -18,3 +18,11 @@ Content-Type: application/json
 ###
 
 GET {{baseUrl}}/tasks/a0568836-8a9e-4b2b-8ada-b4b35527019b
+
+###
+
+DELETE {{baseUrl}}/task/dd2c7eab-ed9e-4246-b846-476741953c65
+
+###
+
+PUT {{baseUrl}}/task/change-status/701b0930-9b7e-42be-ae59-9fb14ab7327a
